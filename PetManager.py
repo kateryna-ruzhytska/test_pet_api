@@ -10,14 +10,15 @@ class PetManager:
         api_endpoint = "/pet/findByStatus"
         options = {
             "headers": {"Content-Type": "application/json;charset=UTF-8"},
-            "params": {"status": f"{status}"}
+            "params": {"status": "{}".format(status)}
         }
-        response = HttpRequest.send_request(uri=f"{self.URL}{api_endpoint}", method=HttpMethods.GET, options=options)
+        response = HttpRequest.send_request(uri="{}{}".format(self.URL, api_endpoint),
+                                            method=HttpMethods.GET, options=options)
         if response.status_code == 200:
             json_response = response.json()
         else:
             json_response = response.text
-        print(f"Find by status '{status}': {json_response}")
+        print("Find by status '{}': {}".format(status, json_response))
 
     def add_new_pet(self):
         api_endpoint = "/pet"
@@ -32,33 +33,36 @@ class PetManager:
                                "name": "string"}],
                      "status": "available"}
         }
-        response = HttpRequest.send_request(uri=f"{self.URL}{api_endpoint}", method=HttpMethods.POST, options=options)
+        response = HttpRequest.send_request(uri="{}{}".format(self.URL, api_endpoint),
+                                            method=HttpMethods.POST, options=options)
         if response.status_code == 200:
             json_response = response.json()
         else:
             json_response = response.text
-        print(f"Add new: {json_response}")
+        print("Add new: {}".format(json_response))
 
     def find_pet_by_id(self, pet_id):
-        api_endpoint = f"/pet/{pet_id}"
+        api_endpoint = "/pet/{}".format(pet_id)
         options = {
             "headers": {"Content-Type": "application/json;charset=UTF-8"}
         }
-        response = HttpRequest.send_request(uri=f"{self.URL}{api_endpoint}", method=HttpMethods.GET, options=options)
+        response = HttpRequest.send_request(uri="{}{}".format(self.URL, api_endpoint),
+                                            method=HttpMethods.GET, options=options)
         if response.status_code == 200:
             json_response = response.json()
         else:
             json_response = response.text
-        print(f"Find by id: {json_response}")
+        print("Find by id: {}".format(json_response))
 
     def delete_pet(self, pet_id):
-        api_endpoint = f"/pet/{pet_id}"
+        api_endpoint = "/pet/{}".format(pet_id)
         options = {
             "headers": {"Content-Type": "application/json;charset=UTF-8"}
         }
-        response = HttpRequest.send_request(uri=f"{self.URL}{api_endpoint}", method=HttpMethods.DELETE, options=options)
+        response = HttpRequest.send_request(uri="{}{}".format(self.URL, api_endpoint),
+                                            method=HttpMethods.DELETE, options=options)
         if response.status_code == 200:
             json_response = response.json()
         else:
             json_response = response.text
-        print(f"Delete by id: {json_response}")
+        print("Delete by id: {}".format(json_response))
