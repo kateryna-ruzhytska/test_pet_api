@@ -24,5 +24,5 @@ class HttpRequest:
                                            params=params,
                                            data=json.dumps(data))
         except Exception as ex:
-            print(f"Exception occurred: {ex} ")
+            print("Exception occurred: {}".format(ex))
         return response
